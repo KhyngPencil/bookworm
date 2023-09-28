@@ -1,0 +1,40 @@
+{% extends 'user/home_layout.html'%}
+{% block content%}
+<div class="content my-5">
+    <form class="my-5" action="" method="post">
+        <h1 class="text-center">Donation Form</h1>
+        <p>Kindly Complete The Form Below With The Amount You Want To Donate.Click on the button and it will take you to a page where you'll input your card details</p>
+       <div class="mb-3">
+        <label for="fullname">Fullname</label>
+        <input type="text" name="fullname" class="form-control" value="
+        {{deets.user_fullname}}">
+       </div>
+       <div class="mb-3">
+        <label for="email">Email</label>
+        <input type="email" name="email" class="form-control" value="{{deets.user_email}}">
+       </div>
+       <div class="mb-3">
+        <label for="amount">Amount</label>
+        <input type="number" name="amount" class="form-control" >
+       </div>
+       <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+       
+       <button class="btn btn-primary form-control">Confirm Payment</button>
+    </form>    
+
+</div>
+{%endblock content%}
+{%block customcss%}
+style="background-color:white"
+{%endblock%}
+
+{% block partner%}
+{%endblock partner%}
+{% block featured%}
+{%endblock featured%}
+
+
+
+   
+ 
+  

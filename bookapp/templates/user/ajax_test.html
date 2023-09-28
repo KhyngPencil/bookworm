@@ -1,0 +1,51 @@
+{%extends 'user/home_layout.html'%}
+{%block content%}
+<div class="content" style="background-color: white;padding: 3em;">
+    <input type="text" class="form-control border-success noround" id="fullname" >
+    <input type="hidden" value="{{csrf_token()}}" name="csrf_token" id="csrf_token">
+<button class="btn btn-danger noround" id="btnload"> Click Me</button>
+<button class="btn btn-danger noround" id="btn_name"> Submit Name</button>
+
+
+<div class="mb-3 border-pprimary" id="feedback">{{data}}</div>
+<div class="mb-3 border-pprimary" id="ajaxfeedback"></div>
+<div class="row">
+    <div class="col">
+        <input type="email" class="form-control border-success" id="email">
+    </div>
+    <div class="col">
+        <button class="btn btn-primary noround" id="btn_email"> Submit Name</button>
+    </div>
+    <div class="col" id="avail"></div>
+</div>
+</div>
+{% endblock %}
+
+{%block customjs%}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#btn_name").click(function(){       
+         g= $('#fullname').val()
+         csrf=$('#csrf_token').val()
+         //data2send="fullname="+g// query string
+         data2send={"fullname":g,"csrf_token":csrf}
+         $('#ajaxfeedback').load('/submission/',data2send,function(){
+            $(this).addClass('alert alert-warning')
+         })
+        })
+
+        $("#btnload").click(function(){
+        $('#ajaxfeedback').load('/submission/')
+        
+        })
+        $('#btn_email').click(function(){
+            mail= $('#email').val()
+            csrf=$('#csrf_token').val()
+            email={"useemail":mail,"csrf_token":csrf}
+            $('#avail').load('/checkusername/',email,function(){
+                $(this).addClass('alert alert-info')
+            })
+        })
+    })
+</script>
+{%endblock%}

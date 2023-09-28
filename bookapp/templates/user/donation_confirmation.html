@@ -1,0 +1,79 @@
+{% extends 'user/home_layout.html'%}
+{% block content%}
+<div class="content my-5">
+    <h2>Confirmation Page</h2>
+    <p>Kindly Confirm The Following Details</p>
+    <div class="mb-3">
+        <label>Donor's Name</label>
+        {{dd.don_fullname}}
+    </div>
+    <div class="mb-3">
+        <label>Donor's Email</label>
+        {{dd.don_email}}
+    </div>
+    
+    <div class="mb-3">
+        <label>Donor's Amount</label>
+        <b>NGN {{dd.don_amt/100}}</b>
+    </div>
+    <div class="mb-3">
+        <label>Transaction Ref</label>
+        <span class="text-danger bg-warning">{{dd.don_refno}}</span>
+    </div>
+    <hr>
+    <h5>Javascript Method Popup</h5>
+    <form id="paymentForm">
+        <div class="mb-3">
+            <a href="/dashboard" class="btn btn-warning ">Cancle Payment</a>
+           
+           <button class="btn btn-dark noround" onclick="payWithPaystack(event)"> Confirm Payment(Popup)</button>
+        </div>
+    </form>
+    <hr>
+    <h5>Redirect Method</h5>
+    <a href="/initialize/paystack" class="btn btn-success">Make Payment</a>
+</div>
+{%endblock content%}
+{%block customcss%}
+style="background-color:white"
+{%endblock%}
+{%block customjs%}
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
+<script>
+    const paymentForm = document.getElementById('paymentForm');
+    paymentForm.addEventListener("submit", payWithPaystack, false);
+
+function payWithPaystack(e) {
+  e.preventDefault();
+
+  let handler = PaystackPop.setup({
+    key: 'pk_test_7c35a5265815b6413bf70d38ddc8eaee8ae7f598', // Replace with your public key
+    email: " {{dd.don_email}}",
+    amount:"{{dd.don_amt}}" ,
+    ref:"{{dd.don_refno}}" ,
+    onClose: function(){
+      alert('Window closed.');
+    },
+    callback: function(response){
+        console.log(reference);
+      let message = 'Payment complete! Reference: ' + response.reference;
+      alert(message);
+    }
+  });
+
+  handler.openIframe();
+}
+
+</script>
+{%endblock%}
+{% block partner%}
+{%endblock partner%}
+{% block featured%}
+{%endblock featured%}
+
+
+
+   
+ 
+  

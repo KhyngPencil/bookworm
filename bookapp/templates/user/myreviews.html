@@ -1,0 +1,30 @@
+{% extends 'user/home_layout.html'%}
+{% block content%}
+    <div id="content" style="background-color: white;">
+        <h1 class="text-center mb-5 mt-5" style="font-family: Georgia, 'Times New Roman', Times, serif;font-size: xx-large;">My Reviews</h1><hr>
+        {%for m in userdeets.user_reviews%}
+        
+        <div class="my-3 mb-3 text-center " style="font-family: 'Times New Roman', Times, serif;">
+            <h3>{{m.rev_title}}</h3>
+            <p>{{m.rev_text}}</p>
+            <p>{{m.rev_date}}</p><hr>
+        </div>
+        {%endfor%}
+    </div>
+{%endblock content%}
+{%block customcss%}
+style="background-color:white"
+{%endblock%}
+{%block customjs%}
+
+{%endblock%}
+{% block partner%}
+{%endblock partner%}
+{% block featured%}
+{%endblock featured%}
+
+
+
+   
+ 
+  

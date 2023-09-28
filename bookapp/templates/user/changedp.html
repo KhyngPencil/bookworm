@@ -1,0 +1,29 @@
+{%extends 'user/home_layout.html'%}
+
+ 
+{%block content%}     
+<div class="content" style="background-color: white;padding:3em">
+  <h3>Change Your Profile Pictutre</h3>
+  <form enctype="multipart/form-data" method="post" action="">
+    {{dpform.csrf_token}}
+    {%if dpform.dp.errors%}
+     {%for e in dpform.dp.errors%}
+     <div class="alert alert-danger"> 
+        {{e}}
+     </div>
+     {%endfor%}
+    {%endif%}
+    <div class="mb-3">
+        {{dpform.dp.label}}
+        {{dpform.dp(class_='form-check')}}
+    </div>
+    <div class="mb-3">
+        {{dpform.btnupload(class_='btn btn-primary')}}
+    </div>
+  </form>
+ </div>
+{%endblock%}
+ 
+
+{% block partner%}{%endblock%}
+{% block featured%}{%endblock%}
